@@ -10,9 +10,9 @@ If you need help, you can find me on the LANCER discord (lugia19).
 
 ## Open enemy scan on Shift+Click
 
-Demo: TBA ON GITHUB VIA THE EDITOR
+**Demo**: TBA ON GITHUB VIA THE EDITOR
 
-Prerequisites: TriggerHappy 
+**Prerequisites**: TriggerHappy 
 
 Allows players to Shift+Click enemies and open their corresponding Scan entry. 
 
@@ -42,9 +42,9 @@ This assumes that the corresponding Scan is the one with the enemy's name in its
 
 ## Automated condition effects
 
-Demo: TBA ON GITHUB VIA THE EDITOR
+**Demo**: TBA ON GITHUB VIA THE EDITOR
 
-Prerequisites: TokenMagicFX and Lancer Conditions.
+**Prerequisites**: TokenMagicFX and Lancer Conditions.
 
 It will automatically apply effects to tokens depending on their heat, overshield, conditions, burn, etc.
 
@@ -55,9 +55,9 @@ Add automatedConditionsHooks.js as a world script.
 
 ## Fix Stress/Structure bars and toggle bar visibility for players
 
-Demo: TBA ON GITHUB VIA THE EDITOR
+**Demo**: TBA ON GITHUB VIA THE EDITOR
 
-Prerequisites: Bar Brawl
+**Prerequisites**: Bar Brawl
 
 The world script does two things:
 1) Allows you to have the correct stress/structure amounts without using the LANCER-specific Bar Brawl fork.
@@ -77,9 +77,9 @@ The macro simply lets you toggle the bar visibility visibility of all selected t
 
 ## Prompt for effects on hit
 
-Demo: TBA ON GITHUB VIA THE EDITOR
+**Demo**: TBA ON GITHUB VIA THE EDITOR
 
-Prerequisites: N/A
+**Prerequisites**: N/A
 
 This is purely a world script, and it makes it so the game will prompt you for certain "on hit" effects.
 
