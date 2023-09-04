@@ -13,12 +13,17 @@ for (const token of tokens) {
 	actorID = actorData._id;
 	actorName = actorData.name;
 	journalEntries = game.journal.contents;
-	triggersEntry = {};
+	triggersEntry = undefined;
 	for (const entry of journalEntries) {
-		if (entry.name.indexOf("Triggers") != -1) {
+		if (entry.name.indexOf("Trigger Happy") != -1) {
 			//This is the entry containing all triggers
 			triggersEntry = entry;
 		}
+	}
+
+	if (triggersEntry == undefined) {
+		ui.notifications.error("ERROR: 'Trigger Happy' journal is MISSING. Please create it. It should be inside a Journal Directory also called 'Trigger Happy'. If you're on v10, you'll need to update this macro yourself for the new journal system.")
+		return
 	}
 
 	for (const entry of journalEntries) {
