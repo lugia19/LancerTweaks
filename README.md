@@ -10,7 +10,11 @@ If you need help, you can find me on the LANCER discord (lugia19).
 
 ## Open enemy scan on Shift+Click
 
-**Demo**: TBA ON GITHUB VIA THE EDITOR
+**Demo**: 
+
+https://github.com/lugia19/LancerTweaks/assets/21088033/501131e2-b624-4003-b373-4ccad5ebbfe7
+
+
 
 **Prerequisites**: TriggerHappy 
 
@@ -42,11 +46,17 @@ This assumes that the corresponding Scan is the one with the enemy's name in its
 
 ## Automated condition effects
 
-**Demo**: TBA ON GITHUB VIA THE EDITOR
+**Demo**: 
+
+https://github.com/lugia19/LancerTweaks/assets/21088033/eaa2b89a-82e4-4eb7-a008-b3ec11403bd4
+
+
 
 **Prerequisites**: TokenMagicFX and Lancer Conditions.
 
 It will automatically apply effects to tokens depending on their heat, overshield, conditions, burn, etc.
+
+There's a bunch of stuff in the background to ensure that the effects look good no matter which order they're applied in, so you don't need to worry about that.
 
 ### Installation
 Add automatedConditionsHooks.js as a world script.
@@ -55,7 +65,11 @@ Add automatedConditionsHooks.js as a world script.
 
 ## Fix Stress/Structure bars and toggle bar visibility for players
 
-**Demo**: TBA ON GITHUB VIA THE EDITOR
+**Demo**:
+
+https://github.com/lugia19/LancerTweaks/assets/21088033/a4c09a12-0b60-409f-a8a9-fa1c1e160604
+
+
 
 **Prerequisites**: Bar Brawl
 
@@ -77,7 +91,11 @@ The macro simply lets you toggle the bar visibility visibility of all selected t
 
 ## Prompt for effects on hit
 
-**Demo**: TBA ON GITHUB VIA THE EDITOR
+**Demo**: 
+
+https://github.com/lugia19/LancerTweaks/assets/21088033/7187cca3-b4d9-48f1-8f49-bc439b34a2e8
+
+
 
 **Prerequisites**: N/A
 
