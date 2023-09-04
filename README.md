@@ -98,7 +98,7 @@ https://github.com/lugia19/LancerTweaks/assets/21088033/d317a75a-1ba5-4ad2-8d9c-
 
 
 
-**Prerequisites**: N/A
+**Prerequisites**: TokenMagicFX for the shock wreath FX.
 
 This is purely a world script, and it makes it so the game will prompt you for certain "on hit" effects.
 
