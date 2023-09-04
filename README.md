@@ -12,7 +12,7 @@ If you need help, you can find me on the LANCER discord (lugia19).
 
 **Demo**: 
 
-https://github.com/lugia19/LancerTweaks/assets/21088033/501131e2-b624-4003-b373-4ccad5ebbfe7
+https://github.com/lugia19/LancerTweaks/assets/21088033/f9ffc45b-6749-4df7-baae-750ae5a889db
 
 
 
@@ -48,7 +48,8 @@ This assumes that the corresponding Scan is the one with the enemy's name in its
 
 **Demo**: 
 
-https://github.com/lugia19/LancerTweaks/assets/21088033/eaa2b89a-82e4-4eb7-a008-b3ec11403bd4
+https://github.com/lugia19/LancerTweaks/assets/21088033/3428fff8-209f-4c31-b8b4-35806892c3b0
+
 
 
 
@@ -67,7 +68,7 @@ Add automatedConditionsHooks.js as a world script.
 
 **Demo**:
 
-https://github.com/lugia19/LancerTweaks/assets/21088033/a4c09a12-0b60-409f-a8a9-fa1c1e160604
+https://github.com/lugia19/LancerTweaks/assets/21088033/a0318a11-9e65-4fab-8649-794dc339f1d4
 
 
 
@@ -93,7 +94,7 @@ The macro simply lets you toggle the bar visibility visibility of all selected t
 
 **Demo**: 
 
-https://github.com/lugia19/LancerTweaks/assets/21088033/7187cca3-b4d9-48f1-8f49-bc439b34a2e8
+https://github.com/lugia19/LancerTweaks/assets/21088033/d317a75a-1ba5-4ad2-8d9c-d155766dd1e7
 
 
 
