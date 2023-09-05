@@ -41,12 +41,13 @@ for (const token of tokens) {
 	for (const entry of journalEntries) {
 		if (entry.name.toLowerCase().indexOf(actorName.toLowerCase()) != -1) {
 			//This is the entry corresponding to the actor we have selected
-			console.log(entry)
-			scanEntryID = entry.data._id;
-			scanEntryName = entry.data.name;
 			if (game.data.release.generation == 9) {
+				scanEntryID = entry.data._id;
+				scanEntryName = entry.data.name;
 				triggerEntryContent = triggersEntry.data.content;
 			} else {
+				scanEntryID = entry._id;
+				scanEntryName = entry.name;
 				triggerEntryContent = triggersEntry.text.content;
 			}
 
