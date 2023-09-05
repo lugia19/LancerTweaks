@@ -20,6 +20,13 @@ for (const token of tokens) {
 			if (game.data.release.generation == 9) {
 				triggersEntry = entry;
 			} else {
+				if (entry.pages.size == 0) {
+					const page = {
+						name: "Triggers",
+						text: { content: "" }
+					};
+					await entry.createEmbeddedDocuments("JournalEntryPage", [page]);
+				}
 				triggersEntry = entry.pages.values().next().value
 			}
 
