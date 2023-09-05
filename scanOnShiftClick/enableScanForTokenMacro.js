@@ -17,32 +17,50 @@ for (const token of tokens) {
 	for (const entry of journalEntries) {
 		if (entry.name.indexOf("Trigger Happy") != -1) {
 			//This is the entry containing all triggers
-			triggersEntry = entry;
+			if (game.data.release.generation == 9) {
+				triggersEntry = entry;
+			} else {
+				triggersEntry = entry.pages.values().next().value
+			}
+
 		}
 	}
 
 	if (triggersEntry == undefined) {
-		ui.notifications.error("ERROR: 'Trigger Happy' journal is MISSING. Please create it. It should be inside a Journal Directory also called 'Trigger Happy'. If you're on v10, you'll need to update this macro yourself for the new journal system.")
+		ui.notifications.error("ERROR: 'Trigger Happy' journal is missing. Please create it. It should be inside a Journal Directory also called 'Trigger Happy'.")
 		return
 	}
 
 	for (const entry of journalEntries) {
 		if (entry.name.toLowerCase().indexOf(actorName.toLowerCase()) != -1) {
 			//This is the entry corresponding to the actor we have selected
+			console.log(entry)
 			scanEntryID = entry.data._id;
 			scanEntryName = entry.data.name;
-			triggerEntryContent = triggersEntry.data.content;
+			if (game.data.release.generation == 9) {
+				triggerEntryContent = triggersEntry.data.content;
+			} else {
+				triggerEntryContent = triggersEntry.text.content;
+			}
+
 			newEntry = "<p>@Actor[" + actorID + "]{" + actorName + "}@Trigger[click]@openScanOnShiftClick[" + actorID + " "
 			if (triggerEntryContent.indexOf(newEntry) != -1) {
+				console.log("Already found, updating")
 				//We already have a trigger entry. Just update the ID to the new scan.
 				oldIDStartIndex = triggerEntryContent.indexOf(newEntry) + newEntry.length;
 				oldIDEndIndex = triggerEntryContent.indexOf("]", oldIDStartIndex);
 				oldID = triggerEntryContent.substring(oldIDStartIndex, oldIDEndIndex);
 				triggerEntryContent = triggerEntryContent.replace(oldID, scanEntryID);
 			} else {
+				console.log("Not found")
 				triggerEntryContent += newEntry + scanEntryID + "]{" + scanEntryName + "}</p>\n<p>"
 			}
-			await triggersEntry.update({ content: triggerEntryContent });
+			if (game.data.release.generation == 9) {
+				await triggersEntry.update({ content: triggerEntryContent });
+			} else {
+				triggersEntry.update({ text: { content: triggerEntryContent } })
+			}
+
 		}
 
 	}
