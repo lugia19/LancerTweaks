@@ -6,7 +6,7 @@ Note: most of these require you to add world scripts. See [here](https://foundry
 
 If you need help, you can find me on the LANCER discord (lugia19).
 
-**WARNING: ALL OF THESE WERE DEVELOPED FOR V9. SOME OF THEM (ESPECIALLY THE SCAN) MAY REQUIRE CHANGES TO WORK WITH V10.**
+**WARNING: ALL OF THESE WERE DEVELOPED FOR V9. SOME OF THEM (EXCEPT THE SCAN ONE, AS THAT WAS TESTED ON V10 TOO) MAY REQUIRE CHANGES TO WORK WITH V10.**
 
 ## Open enemy scan on Shift+Click
 
