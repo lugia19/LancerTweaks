@@ -3,16 +3,17 @@
 //Everything here goes in a world script (added with esmodules in world.json)
 Hooks.once("init", function () {
 	//This makes it so these functions can be called from macros.
-	window["toggleBarVisibility"] = toggleBarVisibility
+	window["toggleBarVisibilityForToken"] = toggleBarVisibilityForToken
+	window["toggleBarVisibilityForActor"] = toggleBarVisibilityForActor
 })
 
 
 Hooks.on("createToken", (tokenDocument, renderData, userID) => {
 	console.log("New token created")
-
-	//Hide the bars by default:
-	toggleBarVisibility(tokenDocument)
-
+	//Hide the bars by default, unless token was scanned:
+	if (!game.actors.get(tokenDocument.actor.id).getFlag("world", "barsVisible")) {
+		toggleBarVisibilityForToken(tokenDocument)
+	}
 
 	//Fix stress/structure
 	if (tokenDocument.actor !== undefined) {
@@ -39,21 +40,55 @@ Hooks.on("createToken", (tokenDocument, renderData, userID) => {
 });
 
 
-function toggleBarVisibility(tokenDocument) {
+async function toggleBarVisibilityForActor(sidebarActor) {
+	//Let's get the current visibility for the prototype token to decide what to toggle it to.
+	let newVisibility = undefined
+	newVisibility = !(sidebarActor.getFlag("world", "barsVisible"));
+	//Set the value
+	await sidebarActor.setFlag("world", "barsVisible", newVisibility)
+
+	//Now we get all currently active tokens and toggle the visibility for them.
+	for (const actorToken of sidebarActor.getActiveTokens()) {
+		await toggleBarVisibilityForToken(actorToken.document, newVisibility)
+	}
+}
+
+
+async function toggleBarVisibilityForToken(tokenDocument, overrideVisibility = undefined) {
+	let shouldBeVisible = false;
+	let tokenBars = tokenDocument.getFlag("barbrawl", "resourceBars");
+	const barNames = Object.keys(tokenBars);
+	//if overrideVisibility is set, we set the visibility to that
+	//if it's undefined, we simply toggle it from the current state
+	if (overrideVisibility != undefined) {
+		shouldBeVisible = overrideVisibility;
+	} else {
+		shouldBeVisible = (tokenDocument.getFlag("barbrawl", "resourceBars." + barNames[0] + ".otherVisibility") == 0)
+	}
+
+
 	let HPHidden = {
 		"id": 'HPHidden',
 		"label": 'HP Hidden',
 		"icon": "modules/lancer-conditions/icons/util/blind.png"
 	}
 
-	let visibilityChecked = false;
-	let shouldBeVisible = false;
+	//Toggle the HPHidden condition if needed
+	let isEffectPresent = false;
+	for (let item of tokenDocument.actor.effects.values()) {
+		if (item.data.label.toLowerCase() == HPHidden.label.toLowerCase()) {
+			isEffectPresent = true
+			break
+		}
+	}
+	console.log(isEffectPresent)
+	console.log(shouldBeVisible)
+	if (isEffectPresent == shouldBeVisible) {
+		await tokenDocument.toggleActiveEffect(HPHidden);
+	}
 
-	//Toggle the HPHidden condition
-	tokenDocument.toggleActiveEffect(HPHidden, true, true);
 
-	let tokenBars = tokenDocument.getFlag("barbrawl", "resourceBars");
-	const barNames = Object.keys(tokenBars);
+
 	for (const barName of barNames) {
 		console.log(tokenDocument.getFlag("barbrawl", "resourceBars." + barName + ".otherVisibility"))
 		/*
@@ -79,24 +114,16 @@ function toggleBarVisibility(tokenDocument) {
 
 		//I'm going to assume that the GM should always be able to see the bars, so let's disable inheritance.
 		if (tokenDocument.getFlag("barbrawl", "resourceBars." + barName + ".ownerVisibility") == -1)
-			tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".ownerVisibility", 50)
+			await tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".ownerVisibility", 50)
 
-
-		if (!visibilityChecked) {
-			visibilityChecked = true;
-			shouldBeVisible = (tokenDocument.getFlag("barbrawl", "resourceBars." + barName + ".otherVisibility") == 0);
-		}
-
-		console.log("visibilityChecked: " + visibilityChecked);
 		console.log("shouldBeVisible: " + shouldBeVisible);
 		console.log("current otherVisibility: " + tokenDocument.getFlag("barbrawl", "resourceBars." + barName + ".otherVisibility"));
 
 		if (shouldBeVisible)
-			tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".otherVisibility", 50)
+			await tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".otherVisibility", 50)
 		else
-			tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".otherVisibility", 0)
+			await tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".otherVisibility", 0)
 
 		console.log("new otherVisibility: " + tokenDocument.getFlag("barbrawl", "resourceBars." + barName + ".otherVisibility"));
 	}
 }
-
