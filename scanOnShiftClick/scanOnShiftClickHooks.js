@@ -11,8 +11,7 @@ Hooks.on('TriggerHappy', (key, args) => {
 	switch (key) {
 		case "openScanOnShiftClick":
 			var scanJournalID = args[1];
-			const event = window.event;
-			if (event?.shiftKey)
+			if (window.event?.shiftKey)
 				game.journal.get(scanJournalID).sheet.render(true)
 			break;
 	}
