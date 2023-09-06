@@ -78,7 +78,9 @@ The world script does two things:
 1) Allows you to have the correct stress/structure amounts without using the LANCER-specific Bar Brawl fork.
 2) Hides the status bars of enemies for players by default.
 
-The macro simply lets you toggle the bar visibility visibility of all selected tokens.
+The macros let you toggle the bar visibility visibility for:
+-All selected tokens (will only toggle it for those tokens)
+-All selected actors (will toggle it for all currently active tokens that belong to that actor, and for future tokens as well)
 
 ### Installation/Usage
 
