@@ -5,6 +5,11 @@ Hooks.on("updateToken", (tokenDocument, tokenChanges, updateData, options) => {
 	console.log("Token update hook triggered")
 	console.log(tokenDocument)
 	console.log(tokenChanges)
+	if (tokenDocument.actor.type == "pilot") {
+		console.log("Cancelling token update because it's for pilot")
+		return
+	}
+
 
 	updateTokenEffectsFromChanges(tokenChanges?.actorData, tokenDocument.actor, tokenDocument.object)
 });
@@ -12,6 +17,13 @@ Hooks.on("updateToken", (tokenDocument, tokenChanges, updateData, options) => {
 
 //This is the hook for tokens tied to actors.
 Hooks.on("updateActor", (actor, actorChanges, context, userID) => {
+	if (game.userId != userID)
+		return
+
+	if (actor.type == "pilot") {
+		return
+	}
+
 	console.log("Actor update hook triggered")
 	//Loop through all the tokens and only update the ones tied to the actor.
 	//The rest will be updated by the other hook.
@@ -26,6 +38,8 @@ Hooks.on("updateActor", (actor, actorChanges, context, userID) => {
 
 //These two hooks handle when an activeEffect (icon) is added/removed.
 Hooks.on("preCreateActiveEffect", (effectProperties, effectData, effectState, userID) => {
+	if (game.userId != userID)
+		return
 	let token = effectProperties.parent.getActiveTokens()[0]
 
 	//We've got the token and the effectData. Let's see which effect it is...
@@ -33,6 +47,8 @@ Hooks.on("preCreateActiveEffect", (effectProperties, effectData, effectState, us
 });
 
 Hooks.on("deleteActiveEffect", (effectProperties, effectState, userID) => {
+	if (game.userId != userID)
+		return
 	let token = effectProperties.parent.getActiveTokens()[0]
 
 	//We've got the token and the effectData. Let's see which effect it is...

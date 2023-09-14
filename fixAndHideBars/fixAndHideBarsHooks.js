@@ -9,6 +9,12 @@ Hooks.once("init", function () {
 
 
 Hooks.on("createToken", (tokenDocument, renderData, userID) => {
+	if (game.userId != userID)
+		return
+	if (tokenDocument.actor.type == "pilot") {
+		return
+	}
+
 	console.log("New token created")
 	//Hide the bars by default, unless token was scanned:
 	if (!game.actors.get(tokenDocument.actor.id).getFlag("world", "barsVisible")) {
