@@ -72,7 +72,7 @@ function updateTokenEffectsFromChanges(actorChanges, actor, token) {
 	if (actorChanges?.data?.hp != undefined || actorChanges?.data?.structure != undefined) {
 		var currentHP = actorChanges.data.hp ?? actor.data.data.derived.hp.value
 		var currentStructure = actorChanges.data.structure ?? actor.data.data.derived.structure.value
-		toggleCondition(token, "destroyed", (currentHP == 0 && currentStructure == 0))
+		toggleCondition(token, "destroyed", (currentHP <= 0 && currentStructure <= 0))
 	}
 
 	if (actorChanges?.data?.burn != undefined) {

@@ -36,7 +36,7 @@ Hooks.on("createToken", (tokenDocument, renderData, userID) => {
 				if (propertyAssociated.includes("derived"))	//It's a derived attribute, we get the actual attribute name by removing "derived."
 					propertyAssociated = propertyAssociated.substring(propertyAssociated.indexOf('.') + 1);
 				console.log(propertyAssociated);
-				let maxValue = tokenDocument.actor.data.data[propertyAssociated];
+				let maxValue = tokenDocument.actor.data.data.derived[propertyAssociated].max;
 				console.log(maxValue);
 				if (currentSubdivisions > maxValue) //There are more subdivisions than the maximum value for stress/structure, fix it
 					tokenDocument.setFlag("barbrawl", "resourceBars." + barName + ".subdivisions", maxValue);
