@@ -29,17 +29,17 @@ function showID(ID) {
 
 function findTargetID(html) {
 	const value = html.find("input#myInputID").val();
-	target_id = value;
+	let target_id = value;
 	for (const token of tokens) {
-		actorData = token.actor.data.data;
+		let actorData = token.actor.data.data;
 		console.log("acquired actorData");
 		if ("loadout" in actorData) {
 			console.log("acquired loadout");
-			actorLoadout = actorData.loadout;
-			systemMounts = actorLoadout.system_mounts;
-			weaponMounts = actorLoadout.weapon_mounts;
+			let actorLoadout = actorData.loadout;
+			let systemMounts = actorLoadout.system_mounts;
+			let weaponMounts = actorLoadout.weapon_mounts;
 			for (const systemMount of systemMounts) {
-				system = systemMount.system;
+				let system = systemMount.system;
 				if (system.id == target_id) {
 					showID(system.fallback_lid)
 					console.log("executionEnd");
@@ -47,9 +47,9 @@ function findTargetID(html) {
 				}
 			}
 			for (const weaponMount of weaponMounts) {
-				weaponSlots = weaponMount.slots;
+				let weaponSlots = weaponMount.slots;
 				for (const weaponSlot of weaponSlots) {
-					weapon = weaponSlot.weapon;
+					let weapon = weaponSlot.weapon;
 					console.log(weapon.id);
 					if (weapon.id == target_id) {
 						showID(weapon.fallback_lid);
@@ -58,6 +58,11 @@ function findTargetID(html) {
 					}
 				}
 			}
+		}
+		if ("pilot" in actorData) {
+			let pilotActor = game.actors.get(actorData["pilot"]["id"])
+			let talent = pilotActor.items.get(target_id)
+			showID(talent.data.data.lid)
 		}
 	}
 }

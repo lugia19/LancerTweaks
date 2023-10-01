@@ -50,6 +50,23 @@ function callMacro(targetFallbackLID, isGrenadeMine, useAction, actionID) {
 				}
 			}
 		}
+
+		console.log("Haven't found it in the loadout, looking in the talents.")
+		if ("pilot" in actorData) {
+			let pilotActor = game.actors.get(actorData["pilot"]["id"])
+			for (const talent of pilotActor.data.items.values()) {
+				if (talent.data.type == "talent") {
+					if (talent.data.data.lid == targetFallbackLID) {
+						if (useAction) {
+							game.lancer.prepareActivationMacro(mechID, talent.id, "Action", actionID)
+						}
+						else {
+							game.lancer.prepareItemMacro(mechID, talent.id)
+						}
+					}
+				}
+			}
+		}
 		console.log("executionEnd");
 	}
 }
