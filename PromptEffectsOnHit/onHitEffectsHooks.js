@@ -66,7 +66,7 @@ Hooks.on("createChatMessage", (data) => {
 	for (const item of pilot.data.items.values()) {
 		if (item.data.type == "talent") {
 			console.log(item)
-			if (item.data.name == "EXEMPLAR") {
+			if (item.data.data.lid == "t_exemplar") {
 				if (item.data.data.ranks.length >= 1) {
 					if (targetTokens.length >= 0)
 						yesNoDialog(sourceToken.actor.data.name, "Apply exemplar's mark?", "Applied Exemplar's mark to target.")
